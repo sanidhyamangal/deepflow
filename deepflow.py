@@ -77,9 +77,13 @@ class Linear(Node):
 
     def forward(self):
         # converting the inputs and weights into np array 
-        inputs, weights = np.array(self.inbound_nodes[0].value), self.inbound_nodes[1].value
+        inputs, weights = np.array(self.inbound_nodes[0].value), np.array(self.inbound_nodes[1].value)
         # product-sum of inputs and weights
-        self.value = inputs.dot(weights) + self.inbound_nodes[2].value
+        try:
+            self.value = inputs.dot(weights) + self.inbound_nodes[2].value
+        except ValueError as e :
+            print("Dimensionality error in linear layer", e)
+            exit()
 """
 No need to change anything below here!
 """
