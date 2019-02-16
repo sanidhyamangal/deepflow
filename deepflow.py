@@ -84,6 +84,23 @@ class Linear(Node):
         except ValueError as e :
             print("Dimensionality error in linear layer", e)
             exit()
+
+class Sigmoid(Node):
+    """
+    A Sigmoid class to implement sigmoid activation function 
+    """
+
+    def __init__(self, node):
+        Node.__init__(self, [node])
+
+    # a sigmoid function for activation
+    def _sigmoid(self,x):
+        return 1. / (1. + np.exp(-x)) # 1. for float value
+
+    # forward method for the training purpose 
+    def forward(self):
+        self.value = self._sigmoid(self.inbound_nodes[0].value)
+
 """
 No need to change anything below here!
 """
