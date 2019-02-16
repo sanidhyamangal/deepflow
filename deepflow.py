@@ -2,6 +2,8 @@
 A deep flow lib similar to tf but in a small scale
 """
 
+import numpy as np # for matrix maths
+
 class Node(object):
     def __init__(self, inbound_nodes=[]):
         # Nodes from which this Node receives values
@@ -74,11 +76,10 @@ class Linear(Node):
 
 
     def forward(self):
-        self.value = self.inbound_nodes[2].value # setting value of biases into value 
-
+        # converting the inputs and weights into np array 
+        inputs, weights = np.array(self.inbound_nodes[0].value), self.inbound_nodes[1].value
         # product-sum of inputs and weights
-        for input, weight in zip(self.inbound_nodes[0].value, self.inbound_nodes[1].value):
-            self.value += input * weight # add product-sum to value
+        self.value = inputs.dot(weights) + self.inbound_nodes[2].value
 """
 No need to change anything below here!
 """
