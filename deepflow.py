@@ -77,7 +77,7 @@ class Linear(Node):
 
     def forward(self):
         # converting the inputs and weights into np array 
-        inputs, weights = np.array(self.inbound_nodes[0].value), np.array(self.inbound_nodes[1].value)
+        inputs, weights = self.inbound_nodes[0].value, self.inbound_nodes[1].value
         # product-sum of inputs and weights
         try:
             self.value = inputs.dot(weights) + self.inbound_nodes[2].value
