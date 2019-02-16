@@ -46,10 +46,10 @@ class Input(Node):
 
 
 class Add(Node):
-    def __init__(self, x, y):
+    def __init__(self, input_nodes = []):
         # You could access `x` and `y` in forward with
         # self.inbound_nodes[0] (`x`) and self.inbound_nodes[1] (`y`)
-        Node.__init__(self, [x, y])
+        Node.__init__(self, input_nodes)
 
     def forward(self):
         """
@@ -58,7 +58,10 @@ class Add(Node):
 
         Your code here!
         """
+        self.value = 0
 
+        for n in self.inbound_nodes:
+            self.value += n.value
 
 """
 No need to change anything below here!

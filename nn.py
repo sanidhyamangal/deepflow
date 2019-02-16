@@ -1,25 +1,20 @@
 """
-This script builds and runs a graph with miniflow.
+No need to change anything here!
 
-There is no need to change anything to solve this quiz!
-
-However, feel free to play with the network! Can you also
-build a network that solves the equation below?
-
-(x + y) + y
+If all goes well, this should work after you
+modify the Add class in miniflow.py.
 """
 
 from deepflow import *
 
-x, y = Input(), Input()
+w, x, y, z = Input(), Input(), Input(), Input()
 
-f = Add(x, y)
+f = Add([x, y, z, w])
 
-feed_dict = {x: 10, y: 5}
+feed_dict = {x: 4, y: 5, z: 10, w:1}
 
-sorted_nodes = topological_sort(feed_dict)
-output = forward_pass(f, sorted_nodes)
+graph = topological_sort(feed_dict)
+output = forward_pass(f, graph)
 
-# NOTE: because topological_sort sets the values for the `Input` nodes we could also access
-# the value for x with x.value (same goes for y).
-print("{} + {} = {} (according to miniflow)".format(feed_dict[x], feed_dict[y], output))
+# output the sum of all the values 
+print(" Sum  of all the nodes  {} (according to deepflow)".format(output))
