@@ -1,5 +1,5 @@
 """
-You need to change the Add() class below.
+A deep flow lib similar to tf but in a small scale
 """
 
 class Node(object):
@@ -63,6 +63,22 @@ class Add(Node):
         for n in self.inbound_nodes:
             self.value += n.value
 
+class Linear(Node):
+    """
+    A Linear class to perform Wx + b
+    """
+
+    def __init__(self, input, weights, biases):
+
+        Node.__init__(self,inbound_nodes=[input, weights, biases])
+
+
+    def forward(self):
+        self.value = self.inbound_nodes[2].value # setting value of biases into value 
+
+        # product-sum of inputs and weights
+        for input, weight in zip(self.inbound_nodes[0].value, self.inbound_nodes[1].value):
+            self.value += input * weight # add product-sum to value
 """
 No need to change anything below here!
 """
